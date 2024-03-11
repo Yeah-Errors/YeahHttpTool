@@ -20,15 +20,17 @@ public class Get {
         header.put("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
     }
     public Get(String url){
-        this.url=url;
+        this(url,null);
     }
     public Get(String url,String... postParams){
         this.url=url;
+        if(postParams!=null){
         StringBuilder postParam = new StringBuilder();
         for (int i = 0; i < postParams.length; i+=2) {
             postParam.append("&").append(postParams[i]).append("=").append(postParams[i + 1]);
         }
         body = postParam.substring(1);
+        }
     }
     public void putHeaderParam(String key,String value){
         header.put(key, value);
