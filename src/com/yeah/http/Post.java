@@ -9,8 +9,8 @@ import java.util.HashMap;
 
 public class Post {
     String url;
-    HashMap<String, String> header;
-    String body;
+    HashMap<String, String> header =new HashMap<>();
+    String body ="";
 
     {
         header.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
@@ -22,7 +22,7 @@ public class Post {
 
     public Post(String url, String... postParams) {
         header.put("host", url.substring(0, url.indexOf("/", 8)));
-        if (postParams != null) {
+        if (postParams != null && postParams.length%2==0) {
             StringBuilder postParam = new StringBuilder();
 
             for (int i = 0; i < postParams.length; i += 2) {

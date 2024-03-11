@@ -14,8 +14,8 @@ import java.util.HashMap;
 
 public class Get {
     String url;
-    HashMap<String,String> header;
-    String body;
+    HashMap<String,String> header= new HashMap<>();
+    String body ="";
     {
         header.put("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
     }
@@ -24,8 +24,9 @@ public class Get {
     }
     public Get(String url,String... postParams){
         this.url=url;
-        if(postParams!=null){
+        if(postParams!=null&&postParams.length%2==0){
         StringBuilder postParam = new StringBuilder();
+
         for (int i = 0; i < postParams.length; i+=2) {
             postParam.append("&").append(postParams[i]).append("=").append(postParams[i + 1]);
         }
@@ -52,7 +53,7 @@ public class Get {
             writeBody.writeBytes(body);
             writeBody.flush();
             writeBody.close();
-            response.append("Response_Code: "+httpURLConnection.getResponseCode());
+            response.append("Response_Code: ").append(httpURLConnection.getResponseCode());
             if(httpURLConnection.getResponseCode()==200){
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(httpURLConnection.getInputStream()));
